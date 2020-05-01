@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'package:sosmed/widgets/header.dart';
 
 class ActivityFeed extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
     String phoneNumber = phoneNumberController.text;
 
     // API URL
-    var url = 'http://10.0.2.2/sosmed/crud/submit_data.php';
+    var url = 'http://192.168.1.102/sosmed/crud/submit_data.php';
 
     // Store all data with Param Name.
     var data = {'name': name, 'email': email, 'phone_number' : phoneNumber};
@@ -75,6 +76,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+		appBar: header(context, titleText: "Inserting Data"),
         body: SingleChildScrollView(
           child: Center(
           child: Column(
@@ -82,7 +84,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
 
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Text('Fill All Information in Form', 
+                child: Text('Isilah Form di bawah ini : ', 
                        style: TextStyle(fontSize: 22))),
 
               Container(
@@ -120,7 +122,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
                 color: Colors.pink,
                 textColor: Colors.white,
                 padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                child: Text('Click Here To Submit Data To Server'),
+                child: Text('Tap Disini Untuk Submit Data Ke Server'),
               ),
 
               Visibility(
