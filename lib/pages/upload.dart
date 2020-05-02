@@ -47,7 +47,7 @@ class _UploadState extends State<Upload> {
               padding: EdgeInsets.only(top: 190),
               child: Image.network(
                 'https://doktorsiaga.co.id/koperasi/images/foreground.png',
-                height: 290,
+                height: 240,
                 width: 320,
                 fit: BoxFit.fill,
               ),
@@ -77,8 +77,8 @@ class _UploadState extends State<Upload> {
             ),
             Container(
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(top: 255, left:1), 
-                margin: const EdgeInsets.only(left:30),
+                padding: EdgeInsets.only(top: 255, left: 1),
+                margin: const EdgeInsets.only(left: 30),
                 child: FlatButton(
                   color: Colors.blue,
                   textColor: Colors.white,
@@ -94,8 +94,8 @@ class _UploadState extends State<Upload> {
                 )),
             Container(
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(top: 255, left: 70), 
-                margin: const EdgeInsets.only(left:60),
+                padding: EdgeInsets.only(top: 255, left: 70),
+                margin: const EdgeInsets.only(left: 60),
                 child: FlatButton(
                   color: Colors.orange,
                   textColor: Colors.white,
@@ -125,6 +125,89 @@ class _UploadState extends State<Upload> {
                     "Sisa Cuti",
                     style: TextStyle(fontSize: 12.0),
                   ),
+                )),
+            Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: 305, left: 1),
+                margin: const EdgeInsets.only(left: 30),
+                child: FlatButton(
+                  color: Colors.white,
+                  textColor: Colors.blue,
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  padding: EdgeInsets.all(8.0),
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {},
+                  child: Text(
+                    "30",
+                    style: TextStyle(fontSize: 32.0),
+                  ),
+                )),
+            Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: 305, left: 70),
+                margin: const EdgeInsets.only(left: 60),
+                child: FlatButton(
+                  color: Colors.white,
+                  textColor: Colors.orange,
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  padding: EdgeInsets.all(8.0),
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {},
+                  child: Text(
+                    "0",
+                    style: TextStyle(fontSize: 32.0),
+                  ),
+                )),
+            Container(
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(top: 305, left: 70),
+                margin: const EdgeInsets.fromLTRB(160, 0, 40, 40),
+                child: FlatButton(
+                  color: Colors.white,
+                  textColor: Colors.grey,
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  padding: EdgeInsets.all(8.0),
+                  splashColor: Colors.blueAccent,
+                  onPressed: () {},
+                  child: Text(
+                    "12",
+                    style: TextStyle(fontSize: 32.0),
+                  ),
+                )),
+            Container(
+                alignment: Alignment.topLeft,
+                width: 220.0,
+                height: 30.0,
+                margin: const EdgeInsets.only(top: 365, left: 30),
+                child: FlatButton(
+                  onPressed: null,
+                  child: Text('Rekap Saya', style: TextStyle(color: Colors.blue)),
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                          color: Colors.blue,
+                          width: 1,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(50)),
+                )),
+            Container(
+                alignment: Alignment.topLeft,
+                width: 220.0,
+                height: 30.0,
+                margin: const EdgeInsets.only(top: 365, left: 200),
+                child: FlatButton(
+                  onPressed: null,
+                  child: Text('Rekap Staff', style: TextStyle(color: Colors.blue)),
+                  textColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                          color: Colors.blue,
+                          width: 1,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(50)),
                 )),
           ],
         ),

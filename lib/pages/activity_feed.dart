@@ -33,7 +33,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
     String phoneNumber = phoneNumberController.text;
 
     // API URL
-    var url = 'http://192.168.1.102/sosmed/crud/submit_data.php';
+    var url = 'http://192.168.1.100/sosmed/crud/submit_data.php';
 
     // Store all data with Param Name.
     var data = {'name': name, 'email': email, 'phone_number' : phoneNumber};
