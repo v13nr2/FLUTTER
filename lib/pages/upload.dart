@@ -184,7 +184,8 @@ class _UploadState extends State<Upload> {
                 margin: const EdgeInsets.only(top: 365, left: 30),
                 child: FlatButton(
                   onPressed: null,
-                  child: Text('Rekap Saya', style: TextStyle(color: Colors.blue)),
+                  child:
+                      Text('Rekap Saya', style: TextStyle(color: Colors.blue)),
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
                       side: BorderSide(
@@ -200,7 +201,8 @@ class _UploadState extends State<Upload> {
                 margin: const EdgeInsets.only(top: 365, left: 200),
                 child: FlatButton(
                   onPressed: null,
-                  child: Text('Rekap Staff', style: TextStyle(color: Colors.blue)),
+                  child:
+                      Text('Rekap Staff', style: TextStyle(color: Colors.blue)),
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
                       side: BorderSide(
@@ -209,6 +211,61 @@ class _UploadState extends State<Upload> {
                           style: BorderStyle.solid),
                       borderRadius: BorderRadius.circular(50)),
                 )),
+            Container(
+              alignment: Alignment.topCenter,
+              margin: const EdgeInsets.only(top: 405, left: 15),
+              child: Image.network(
+                'https://doktorsiaga.co.id/koperasi/images/menuutama.png',
+                height: 56,
+                width: 560,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.white,
+                width: 1,
+              )),
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(top: 455, left: 15),
+              child: Image.network(
+                'https://doktorsiaga.co.id/koperasi/images/absensi.png',
+                height: 128,
+                width: 104,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.white,
+                width: 1,
+              )),
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(top: 455, left: 125),
+              child: Image.network(
+                'https://doktorsiaga.co.id/koperasi/images/izin.png',
+                height: 128,
+                width: 104,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.white,
+                width: 1,
+              )),
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(top: 455, left: 235, right: 15),
+              child: Image.network(
+                'https://doktorsiaga.co.id/koperasi/images/infogaji.png',
+                height: 128,
+                width: 104,
+                fit: BoxFit.fill,
+              ),
+            ),
           ],
         ),
       ),
