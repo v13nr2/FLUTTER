@@ -246,7 +246,7 @@ class _UploadState extends State<Upload> {
               margin: const EdgeInsets.only(top: 455, left: 125),
               child: Image.network(
                 'https://doktorsiaga.co.id/koperasi/images/izin.png',
-                height: 128,
+                height: 123,
                 width: 104,
                 fit: BoxFit.fill,
               ),
