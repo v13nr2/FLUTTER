@@ -37,7 +37,12 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
     setState(() {
       isAuth = false;
     });
-
+    
+  Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Home()),
+    );
+    
     //return Home.buildUnAuthScreen();
   }
 

@@ -19,6 +19,8 @@ class _HomeState extends State<Home> {
   PageController pageController;
   int pageIndex = 0;
 
+
+
   @override
   void initState() {
     super.initState();
@@ -119,8 +121,11 @@ class _HomeState extends State<Home> {
     keyboardType: TextInputType.emailAddress,
     autofocus: false,
     initialValue: '',
+    style: TextStyle(fontSize: 18.0, color: Colors.white),
+    cursorColor: Colors.white,
     decoration: InputDecoration(
       hintText: 'Email',
+      hintStyle: TextStyle(fontSize: 18.0, color: Colors.white),
       contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
     ),
@@ -130,8 +135,11 @@ class _HomeState extends State<Home> {
     autofocus: false,
     initialValue: '',
     obscureText: true,
+    style: TextStyle(fontSize: 18.0, color: Colors.white),
+    cursorColor: Colors.white,
     decoration: InputDecoration(
       hintText: 'Password',
+      hintStyle: TextStyle(fontSize: 18.0, color: Colors.white),
       contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
     ),
