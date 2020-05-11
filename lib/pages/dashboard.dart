@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:sosmed/models/category.dart';
+import 'package:sosmed/widgets/quiz_options.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -120,7 +121,7 @@ class _DashboardState extends State<Dashboard> {
     showModalBottomSheet(
       context: context,
       builder: (sheetContext) => BottomSheet(
-        builder: (_) => null,
+        builder: (_) => QuizOptionsDialog(category: category,),
         onClosing: () {},
       ),
     );
