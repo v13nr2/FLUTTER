@@ -19,8 +19,6 @@ class _HomeState extends State<Home> {
   PageController pageController;
   int pageIndex = 0;
 
-
-
   @override
   void initState() {
     super.initState();
@@ -88,7 +86,10 @@ class _HomeState extends State<Home> {
           ActivityFeed(),
           Upload(),
           Search(),
-          Profile(),
+          RaisedButton(
+            child: Text('Logout'),
+            onPressed: logout,
+          ),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
