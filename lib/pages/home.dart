@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sosmed/pages/activity_feed.dart';
-import 'package:sosmed/pages/profile.dart';
 import 'package:sosmed/pages/search.dart';
 import 'package:sosmed/pages/dashboard.dart';
 import 'package:sosmed/pages/upload.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> {
   bool isAuth = false;
   PageController pageController;
   int pageIndex = 0;
+
 
   @override
   void initState() {
@@ -36,6 +38,27 @@ class _HomeState extends State<Home> {
       print('Error signing in: $err');
     });
   }
+
+
+static doLogin(String username, String password) async {
+  
+    String myurl =
+        "https://doktorsiaga.co.id/api/user/login";
+    http.post(myurl, headers: {
+      'Accept': 'application/json',
+      'x-api-key': 'DF1E02B621FBFD5849C54451D13BE778'
+    }, body: {
+      "username": username,
+      "password": password
+    }).then((response) {
+      print(response.statusCode);
+      print(response.body);     
+
+  }
+    );
+}
+
+
 
   handleSignIn(GoogleSignInAccount account) {
     if (account != null) {
@@ -118,7 +141,9 @@ class _HomeState extends State<Home> {
     // );
   }
 
-  final email = TextFormField(
+
+
+  static final email = TextFormField(
     keyboardType: TextInputType.emailAddress,
     autofocus: false,
     initialValue: '',
@@ -132,7 +157,7 @@ class _HomeState extends State<Home> {
     ),
   );
 
-  final password = TextFormField(
+  static final password = TextFormField(
     autofocus: false,
     initialValue: '',
     obscureText: true,
@@ -157,6 +182,7 @@ class _HomeState extends State<Home> {
         height: 42.0,
         onPressed: () {
           //Navigator.of(context).pushNamed(HomePage.tag);
+          doLogin('user@user.com', 'useruser');
         },
         child: Text(
           'Log In',
@@ -193,7 +219,7 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'VieShare',
+              'Primera',
               style: TextStyle(
                 fontFamily: "Signatra",
                 fontSize: 90.0,

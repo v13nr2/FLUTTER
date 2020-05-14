@@ -13,7 +13,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('PENGAYOMAN SHARING'),
+          title: Text('PRIMERA.CO.ID'),
           elevation: 0,
         ),
         body: Stack(
