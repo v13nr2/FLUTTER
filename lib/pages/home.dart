@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sosmed/pages/activity_feed.dart';
@@ -41,7 +42,6 @@ class _HomeState extends State<Home> {
   }
 
   doLogin(String username, String passs) async {
-    
     http.post(myurl, headers: {
       'Accept': 'application/json',
       'x-api-key': 'DF1E02B621FBFD5849C54451D13BE778'
@@ -51,8 +51,53 @@ class _HomeState extends State<Home> {
     }).then((response) {
       print(response.statusCode);
       print(response.body);
+      if (response.body != null) {
+        var mData = json.decode(response.toString());
+        if (mData != null) {
+          bool vStatus = mData["status"];
+
+          if (vStatus == true) {
+            //. save data
+            showAlert(context, "AAA", "Login Sukses");
+          } else {
+            //. failed
+            showAlert(context, "BBB", "Error");
+          }
+        } else {
+          showAlert(context, "Parsing respond error", "Error");
+        }
+      } else {
+        showAlert(context, "Res", "Login Res");
+      }
     });
   }
+
+
+Future<bool> showAlert(BuildContext context, String text, String title) {
+  return showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: Text(text),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.pop(context, true);
+            },
+          ),
+          FlatButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.pop(context, false);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 
   handleSignIn(GoogleSignInAccount account) {
     if (account != null) {
@@ -162,7 +207,6 @@ class _HomeState extends State<Home> {
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
     ),
   );
-
 
   final forgotLabel = FlatButton(
     child: Text(
