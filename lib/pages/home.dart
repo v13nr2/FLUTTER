@@ -7,7 +7,6 @@ import 'package:sosmed/pages/upload.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
-
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
 class Home extends StatefulWidget {
@@ -19,7 +18,9 @@ class _HomeState extends State<Home> {
   bool isAuth = false;
   PageController pageController;
   int pageIndex = 0;
-
+  String myurl = "https://doktorsiaga.co.id/api/user/login";
+  TextEditingController _txtUser = TextEditingController();
+  TextEditingController _txtPassword = TextEditingController();
 
   @override
   void initState() {
@@ -39,26 +40,19 @@ class _HomeState extends State<Home> {
     });
   }
 
-
-static doLogin(String username, String password) async {
-  
-    String myurl =
-        "https://doktorsiaga.co.id/api/user/login";
+  doLogin(String username, String passs) async {
+    
     http.post(myurl, headers: {
       'Accept': 'application/json',
       'x-api-key': 'DF1E02B621FBFD5849C54451D13BE778'
     }, body: {
-      "username": username,
-      "password": password
+      "username": _txtUser.value.text,
+      "password": _txtPassword.value.text,
     }).then((response) {
       print(response.statusCode);
-      print(response.body);     
-
+      print(response.body);
+    });
   }
-    );
-}
-
-
 
   handleSignIn(GoogleSignInAccount account) {
     if (account != null) {
@@ -141,8 +135,6 @@ static doLogin(String username, String password) async {
     // );
   }
 
-
-
   static final email = TextFormField(
     keyboardType: TextInputType.emailAddress,
     autofocus: false,
@@ -171,26 +163,6 @@ static doLogin(String username, String password) async {
     ),
   );
 
-  final loginButton = Padding(
-    padding: EdgeInsets.symmetric(vertical: 16.0),
-    child: Material(
-      borderRadius: BorderRadius.circular(30.0),
-      shadowColor: Colors.lightBlueAccent.shade100,
-      elevation: 5.0,
-      child: MaterialButton(
-        minWidth: 200.0,
-        height: 42.0,
-        onPressed: () {
-          //Navigator.of(context).pushNamed(HomePage.tag);
-          doLogin('user@user.com', 'useruser');
-        },
-        child: Text(
-          'Log In',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    ),
-  );
 
   final forgotLabel = FlatButton(
     child: Text(
@@ -231,11 +203,60 @@ static doLogin(String username, String password) async {
               padding: EdgeInsets.only(left: 24.0, right: 24.0),
               children: <Widget>[
                 SizedBox(height: 48.0),
-                email,
+                TextField(
+                  controller: _txtUser,
+                  obscureText: false,
+                  style: TextStyle(fontSize: 20.0),
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: "Username",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0))),
+                ),
                 SizedBox(height: 8.0),
-                password,
+                TextField(
+                  controller: _txtPassword,
+                  obscureText: true,
+                  style: TextStyle(fontSize: 20.0),
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: "Password",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0))),
+                ),
                 SizedBox(height: 24.0),
-                loginButton,
+                RaisedButton(
+                    color: Colors.blue[600],
+                    child: Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        //_isLoading = true;
+                      });
+                      //. request login
+                      http.post(myurl, headers: {
+                        'Accept': 'application/json',
+                        'x-api-key': 'DF1E02B621FBFD5849C54451D13BE778'
+                      }, body: {
+                        "username": _txtUser.value.text,
+                        "password": _txtPassword.value.text,
+                      }).then((response) {
+                        print(response.statusCode);
+                        print(response.body);
+                      });
+
+                      setState(() {
+                        //_checkSession = false;
+                      });
+                      //Navigator.pushNamed(context, "/crud");
+                    }),
                 forgotLabel
               ],
             ),
