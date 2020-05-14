@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
     }).then((response) {
       print(response.statusCode);
       print(response.body);
-      if (response.body != null) {
+      if (response.body.toString() != null) {
         var mData = json.decode(response.toString());
         if (mData != null) {
           bool vStatus = mData["status"];
