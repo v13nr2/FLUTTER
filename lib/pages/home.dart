@@ -156,7 +156,10 @@ class _HomeState extends State<Home> {
           onTap: onTap,
           activeColor: Theme.of(context).primaryColor,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+            ),
             BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
             BottomNavigationBarItem(
               icon: Icon(
@@ -165,7 +168,10 @@ class _HomeState extends State<Home> {
               ),
             ),
             BottomNavigationBarItem(icon: Icon(Icons.search)),
-            BottomNavigationBarItem(icon: Icon(Icons.account_circle)),
+            BottomNavigationBarItem(icon: 
+              Icon(Icons.account_circle),
+              title: Text("Profile"),
+              ),
           ]),
     );
     // return RaisedButton(
