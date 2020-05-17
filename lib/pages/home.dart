@@ -163,9 +163,10 @@ class _HomeState extends State<Home> {
             BottomNavigationBarItem(icon: Icon(Icons.notifications_active)),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.photo_camera,
+                Icons.whatshot,
                 size: 35.0,
               ),
+              title: Text("Absen"),
             ),
             BottomNavigationBarItem(icon: Icon(Icons.search)),
             BottomNavigationBarItem(icon: 
