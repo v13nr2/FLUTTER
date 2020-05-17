@@ -121,6 +121,18 @@ class _HomeState extends State<Home> {
     );
   }
 
+  yukLogout() {
+    setState(() {
+      isAuth = false;
+    });
+  }
+
+  setLogin() {
+    setState(() {
+      isAuth = true;
+    });
+  }
+
   Scaffold buildAuthScreen() {
     return Scaffold(
       body: PageView(
@@ -130,9 +142,10 @@ class _HomeState extends State<Home> {
           Upload(),
           Search(),
           RaisedButton(
-            child: Text('Logout'),
-            onPressed: logout,
-          ),
+              child: Text('Logout'),
+              onPressed: yukLogout //buildUnAuthScreen//logout,
+
+              ),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
@@ -282,7 +295,7 @@ class _HomeState extends State<Home> {
                           String vPesan = mData["message"];
                           if (vStatus == true) {
                             showAlert(context, vPesan, "Login Sukses");
-                            isAuth = true;
+                            setLogin();
                           } else {
                             showAlert(context, vPesan, "Login Gagal");
                           }
