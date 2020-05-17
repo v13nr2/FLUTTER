@@ -49,55 +49,36 @@ class _HomeState extends State<Home> {
       "username": _txtUser.value.text,
       "password": _txtPassword.value.text,
     }).then((response) {
-      print(response.statusCode);
-      print(response.body);
-      if (response.body.toString() != null) {
-        var mData = json.decode(response.toString());
-        if (mData != null) {
-          bool vStatus = mData["status"];
-
-          if (vStatus == true) {
-            //. save data
-            showAlert(context, "AAA", "Login Sukses");
-          } else {
-            //. failed
-            showAlert(context, "BBB", "Error");
-          }
-        } else {
-          showAlert(context, "Parsing respond error", "Error");
-        }
-      } else {
-        showAlert(context, "Res", "Login Res");
-      }
+      //print(response.statusCode);
+      //print(response.body);
     });
   }
 
-
-Future<bool> showAlert(BuildContext context, String text, String title) {
-  return showDialog<bool>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(title),
-        content: Text(text),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Ok'),
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
-          ),
-          FlatButton(
-            child: Text('Cancel'),
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
+  Future<bool> showAlert(BuildContext context, String text, String title) {
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(text),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+            ),
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   handleSignIn(GoogleSignInAccount account) {
     if (account != null) {
@@ -294,6 +275,20 @@ Future<bool> showAlert(BuildContext context, String text, String title) {
                       }).then((response) {
                         print(response.statusCode);
                         print(response.body);
+
+                        var mData = json.decode(response.body.toString());
+                        if (mData != null) {
+                          bool vStatus = mData["status"];
+                          String vPesan = mData["message"];
+                          if (vStatus == true) {
+                            showAlert(context, vPesan, "Login Sukses");
+                            isAuth = true;
+                          } else {
+                            showAlert(context, vPesan, "Login Gagal");
+                          }
+                        } else {
+                          showAlert(context, "Parsing respond error", "Error");
+                        }
                       });
 
                       setState(() {
