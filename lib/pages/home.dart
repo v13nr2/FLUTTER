@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   bool isAuth = false;
   PageController pageController;
   int pageIndex = 0;
-  String myurl = "https://doktorsiaga.co.id/api/user/login";
+  String myurl = utils.login_url;
   TextEditingController _txtUser = TextEditingController();
   TextEditingController _txtPassword = TextEditingController();
 

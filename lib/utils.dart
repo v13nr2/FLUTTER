@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 const String url_api = "http://10.0.2.2/sosmed/crud/service.php";
 const String x_api_key = "DF1E02B621FBFD5849C54451D13BE778";
- 
+const String login_url = "https://doktorsiaga.co.id/api/user/login";
 
 class UserData {
   static String userName = "";
