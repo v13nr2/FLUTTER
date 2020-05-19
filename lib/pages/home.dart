@@ -7,6 +7,8 @@ import 'package:sosmed/pages/dashboard.dart';
 import 'package:sosmed/pages/upload.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:sosmed/utils.dart' as utils;
+
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -288,7 +290,7 @@ class _HomeState extends State<Home> {
                       //. request login
                       http.post(myurl, headers: {
                         'Accept': 'application/json',
-                        'x-api-key': 'DF1E02B621FBFD5849C54451D13BE778'
+                        'x-api-key': utils.x_api_key,
                       }, body: {
                         "username": _txtUser.value.text.trim(),
                         "password": _txtPassword.value.text.trim(),
