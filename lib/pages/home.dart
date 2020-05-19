@@ -290,8 +290,8 @@ class _HomeState extends State<Home> {
                         'Accept': 'application/json',
                         'x-api-key': 'DF1E02B621FBFD5849C54451D13BE778'
                       }, body: {
-                        "username": _txtUser.value.text,
-                        "password": _txtPassword.value.text,
+                        "username": _txtUser.value.text.trim(),
+                        "password": _txtPassword.value.text.trim(),
                       }).then((response) {
                         print(response.statusCode);
                         print(response.body);
