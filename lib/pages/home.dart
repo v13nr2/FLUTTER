@@ -36,6 +36,9 @@ class _HomeState extends State<Home> {
       print('Error signing in: $err');
     });
     // Reauthenticate user when app is opened
+
+    //perlu pendalaman lanjut untuk bisa provide di desktop app
+    //v13nr 
     googleSignIn.signInSilently(suppressErrors: false).then((account) {
       handleSignIn(account);
     }).catchError((err) {
@@ -238,7 +241,7 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Primera',
+              'WiPaL',
               style: TextStyle(
                 fontFamily: "Signatra",
                 fontSize: 90.0,
