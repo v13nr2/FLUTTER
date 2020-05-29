@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
+import 'package:sosmed/pages/camera.dart';
 class Upload extends StatefulWidget {
   @override
   _UploadState createState() => _UploadState();
 }
 
 class _UploadState extends State<Upload> {
-
-  _gotoAbsensi(){
-     Alert(
+  _gotoAbsensi() {
+    Alert(
       context: context,
       type: AlertType.error,
-      title: "RFLUTTER ALERT",
-      desc: "Flutter is more awesome with RFlutter Alert.",
+      title: "Siap Absen!",
+      desc: "Silahkan melakukan Absensi.",
       buttons: [
         DialogButton(
           child: Text(
-            "COOL",
+            "Take Camera",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.push(context,
+   MaterialPageRoute(builder: (context) => TakePictureScreen()),), //Navigator.pop(context),
           width: 120,
         )
       ],
@@ -253,11 +253,11 @@ class _UploadState extends State<Upload> {
               child: GestureDetector(
                 onTap: _gotoAbsensi,
                 child: Image.network(
-                'https://doktorsiaga.co.id/koperasi/images/absensi.png',
-                height: 128,
-                width: 104,
-                fit: BoxFit.fill,
-              ),
+                  'https://doktorsiaga.co.id/koperasi/images/absensi.png',
+                  height: 128,
+                  width: 104,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Container(
