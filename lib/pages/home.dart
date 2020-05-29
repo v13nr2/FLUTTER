@@ -186,33 +186,9 @@ class _HomeState extends State<Home> {
     // );
   }
 
-  static final email = TextFormField(
-    keyboardType: TextInputType.emailAddress,
-    autofocus: false,
-    initialValue: '',
-    style: TextStyle(fontSize: 18.0, color: Colors.white),
-    cursorColor: Colors.white,
-    decoration: InputDecoration(
-      hintText: 'Email',
-      hintStyle: TextStyle(fontSize: 18.0, color: Colors.white),
-      contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-    ),
-  );
 
-  static final password = TextFormField(
-    autofocus: false,
-    initialValue: '',
-    obscureText: true,
-    style: TextStyle(fontSize: 18.0, color: Colors.white),
-    cursorColor: Colors.white,
-    decoration: InputDecoration(
-      hintText: 'Password',
-      hintStyle: TextStyle(fontSize: 18.0, color: Colors.white),
-      contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-    ),
-  );
+
+
 
   final forgotLabel = FlatButton(
     child: Text(
