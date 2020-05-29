@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Upload extends StatefulWidget {
   @override
@@ -6,6 +7,26 @@ class Upload extends StatefulWidget {
 }
 
 class _UploadState extends State<Upload> {
+
+  _gotoAbsensi(){
+     Alert(
+      context: context,
+      type: AlertType.error,
+      title: "RFLUTTER ALERT",
+      desc: "Flutter is more awesome with RFlutter Alert.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "COOL",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        )
+      ],
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -229,11 +250,14 @@ class _UploadState extends State<Upload> {
               )),
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(top: 455, left: 15),
-              child: Image.network(
+              child: GestureDetector(
+                onTap: _gotoAbsensi,
+                child: Image.network(
                 'https://doktorsiaga.co.id/koperasi/images/absensi.png',
                 height: 128,
                 width: 104,
                 fit: BoxFit.fill,
+              ),
               ),
             ),
             Container(

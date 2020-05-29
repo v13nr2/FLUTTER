@@ -28,7 +28,8 @@ dependencies:
   camera: ^0.5.8+2
   path_provider:
   path:
-
+  rflutter_alert: ^1.0.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
