@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sosmed/pages/camera.dart';
+
 class Upload extends StatefulWidget {
   @override
   _UploadState createState() => _UploadState();
@@ -19,8 +20,10 @@ class _UploadState extends State<Upload> {
             "Take Camera",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.push(context,
-   MaterialPageRoute(builder: (context) => TakePictureScreen()),), //Navigator.pop(context),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TakePictureScreen()),
+          ), //Navigator.pop(context),
           width: 120,
         )
       ],
