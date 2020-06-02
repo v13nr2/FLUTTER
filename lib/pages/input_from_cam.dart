@@ -45,6 +45,12 @@ class _InputCameraState extends State<InputCamera> {
           options: Options(headers: {'x-api-key': utils.x_api_key}));
       //print response dari server
       print(response.data);
+      print(response.statusCode);
+      //print(response.request);
+      if(response.statusCode==200){
+        showAlert(context, "Uploaded", "Status Upload ?");
+      }
+      
     } catch (e) {
       print(e);
     }
@@ -81,4 +87,31 @@ class _InputCameraState extends State<InputCamera> {
           child: _image != null ? Image.file(_image) : Text('Input Action!')),
     );
   }
+
+   Future<bool> showAlert(BuildContext context, String text, String title) {
+    return showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(text),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+            ),
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }
