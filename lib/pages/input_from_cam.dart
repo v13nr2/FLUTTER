@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-//import 'package:sosmed/utils.dart' as utils;
+import 'package:sosmed/utils.dart' as utils;
 import 'package:http_parser/http_parser.dart';
 
 class InputCamera extends StatefulWidget {
@@ -22,7 +22,7 @@ class _InputCameraState extends State<InputCamera> {
   }
 
   Future uploadForm() async {
-    final String url = "https://doktorsiaga.co.id/api/bukti_upload/add";
+    final String url = utils.upload_url;
 
     String fileName = _image.path.split('/').last;
 
@@ -39,11 +39,10 @@ class _InputCameraState extends State<InputCamera> {
         'name': fileName.substring(0,3)+'.jpg',
         //'photo': fileName+'.jpg',
       });
-      //import utilsnya mas, td foto emg gak masuk ya?
+      
       var response = await dio.post(url,
           data: formData,
-          //'x-api-key': utils.x_api_key,
-          options: Options(headers: {'x-api-key': 'DF1E02B621FBFD5849C54451D13BE778'}));
+          options: Options(headers: {'x-api-key': utils.x_api_key}));
       //print response dari server
       print(response.data);
     } catch (e) {
@@ -59,11 +58,6 @@ class _InputCameraState extends State<InputCamera> {
         backgroundColor: Colors.white,
         title: Text('Input Camera', style: TextStyle(color: Colors.black54)),
         actions: [
-          //https://doktorsiaga.co.id/api/bukti_upload/add
-          //variabel = photo(text), name(text)
-          //header x-api-key
-          // saya lanjut?
-
           GestureDetector(
             onTap: () {
   
