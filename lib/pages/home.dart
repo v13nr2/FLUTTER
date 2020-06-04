@@ -8,6 +8,7 @@ import 'package:sosmed/pages/upload.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:sosmed/utils.dart' as utils;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -117,6 +118,19 @@ class _HomeState extends State<Home> {
       this.pageIndex = pageIndex;
     });
   }
+
+
+_simpanSP(namasp, valuesp) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(namasp, valuesp);
+}
+
+_panggilSP(namasp) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var _ambiltext = prefs.getString(namasp);
+  print(_ambiltext);
+}
+
 
   onTap(int pageIndex) {
     pageController.animateToPage(
@@ -278,12 +292,21 @@ class _HomeState extends State<Home> {
                         print(response.body);
 
                         var mData = json.decode(response.body.toString());
+
                         if (mData != null) {
                           bool vStatus = mData["status"];
                           String vPesan = mData["message"];
+                          String vNama = mData["data"]["full_name"];
+
                           if (vStatus == true) {
                             showAlert(context, vPesan, "Login Sukses");
                             setLogin();
+                            _simpanSP('emailSP', _txtUser.value.text.trim());
+                            _simpanSP('namaSP', vNama);
+                            print("Email =  ");
+                            _panggilSP('emailSP');
+                            print("Nama =  ");
+                            _panggilSP('namaSP');
                           } else {
                             showAlert(context, vPesan, "Login Gagal");
                           }
