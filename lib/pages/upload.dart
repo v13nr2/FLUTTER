@@ -3,6 +3,8 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sosmed/pages/camera.dart';
 import 'package:sosmed/pages/input_from_cam.dart';
 
+import 'kamera.dart';
+
 class Upload extends StatefulWidget {
   @override
   _UploadState createState() => _UploadState();
@@ -23,7 +25,7 @@ class _UploadState extends State<Upload> {
           ),
           onPressed: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => InputCamera()), //ntar ganti disini
+            MaterialPageRoute(builder: (context) => FormDemo()), //ntar ganti disini
           ), //Navigator.pop(context),
           width: 120,
         )

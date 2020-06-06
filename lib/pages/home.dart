@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
     // Reauthenticate user when app is opened
 
     //perlu pendalaman lanjut untuk bisa provide di desktop app
-    //v13nr 
+    //v13nr android 5 gak jalan
     googleSignIn.signInSilently(suppressErrors: false).then((account) {
       handleSignIn(account);
     }).catchError((err) {
