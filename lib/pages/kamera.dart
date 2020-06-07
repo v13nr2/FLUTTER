@@ -62,11 +62,6 @@ void initState() {
 
   
 
-_simpanSP(namasp, valuesp) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString(namasp, valuesp);
-}
-
 _panggilSP(namasp) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var _ambiltext = prefs.getString(namasp);
@@ -90,6 +85,8 @@ _panggilSP(namasp) async {
           ),
         ),
         'name': _txtUser.value.text,
+        'bertugas': _txtUser.value.text,
+        'deskripsi': _txtEmail.value.text,
         //'photo': fileName+'.jpg',
       });
 
