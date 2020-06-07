@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sosmed/utils.dart' as utils;
 import 'package:http_parser/http_parser.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 main() {
   runApp(MyApp());
@@ -35,6 +35,10 @@ class _FormDemoState extends State<FormDemo> {
   String vPesan;
   File _image;
   final imagePicker = ImagePicker();
+
+  TextEditingController _txtUser = TextEditingController();
+  TextEditingController _txtEmail = TextEditingController();
+
   Dio dio = Dio();
 
   Future<File> getImageCam() async {
@@ -43,6 +47,32 @@ class _FormDemoState extends State<FormDemo> {
 
     return File(image.path);
   }
+
+
+
+
+@override
+void initState() {
+      super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _txtUser.text = await _panggilSP('namaSP');
+      _txtEmail.text = await _panggilSP('emailSP');
+    });
+}
+
+  
+
+_simpanSP(namasp, valuesp) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(namasp, valuesp);
+}
+
+_panggilSP(namasp) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var _ambiltext = prefs.getString(namasp);
+  return _ambiltext;
+}
+
 
   Future uploadForm() async {
     final String url = utils.upload_url;
@@ -59,7 +89,7 @@ class _FormDemoState extends State<FormDemo> {
             'jpg',
           ),
         ),
-        'name': fileName.substring(0, 3) + '.jpg',
+        'name': _txtUser.value.text,
         //'photo': fileName+'.jpg',
       });
 
@@ -151,6 +181,7 @@ class _FormDemoState extends State<FormDemo> {
       padding: const EdgeInsets.all(18.0),
       child: TextFormField(
         decoration: InputDecoration(labelText: 'Email'),
+        controller: _txtEmail,
         validator: (String value) {
           if (!RegExp(
                   r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
@@ -174,6 +205,7 @@ class _FormDemoState extends State<FormDemo> {
       padding: const EdgeInsets.all(18.0),
       child: TextFormField(
         decoration: InputDecoration(labelText: 'Nama'),
+        controller: _txtUser,
         validator: (String value) {
           if (value.isEmpty) {
             return 'Preencha a senha';
