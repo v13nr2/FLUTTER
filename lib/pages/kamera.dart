@@ -6,6 +6,7 @@ import 'package:sosmed/utils.dart' as utils;
 import 'package:http_parser/http_parser.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:geolocator/geolocator.dart';
 
 main() {
   runApp(MyApp());
@@ -40,7 +41,8 @@ class _FormDemoState extends State<FormDemo> {
   TextEditingController _txtEmail = TextEditingController();
 
   Dio dio = Dio();
-
+  
+  
   Future<File> getImageCam() async {
     var image =
         await imagePicker.getImage(source: ImageSource.camera, maxHeight: 180);
@@ -48,7 +50,21 @@ class _FormDemoState extends State<FormDemo> {
     return File(image.path);
   }
 
+  Position _currentPosition;
 
+  _getCurrentLocation() {
+    final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
 
 @override
@@ -58,6 +74,8 @@ void initState() {
       _txtUser.text = await _panggilSP('namaSP');
       _txtEmail.text = await _panggilSP('emailSP');
     });
+
+    _getCurrentLocation();
 }
 
   
@@ -87,7 +105,10 @@ _panggilSP(namasp) async {
         'name': _txtUser.value.text,
         'bertugas': _txtUser.value.text,
         'deskripsi': _txtEmail.value.text,
-        //'photo': fileName+'.jpg',
+        'jenis_upload': 'Masuk',
+        'lat': _currentPosition != null ? _currentPosition.latitude : "",
+        'lang': _currentPosition != null ? _currentPosition.longitude : ""
+
       });
 
       var response = await dio.post(url,
@@ -166,6 +187,15 @@ _panggilSP(namasp) async {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _image != null ? Image.file(_image) : Text('Input Action!'),
+            if (_currentPosition != null)
+              Text(
+                  "LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}"),
+            FlatButton(
+              child: Text("Get location"),
+              onPressed: () {
+                _getCurrentLocation();
+              },
+            ),
             _buildEmailField(),
             _buildPasswordField(),
             _buildSubmitButton(),
