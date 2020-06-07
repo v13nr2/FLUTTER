@@ -31,20 +31,20 @@ class _HomeState extends State<Home> {
     super.initState();
     pageController = PageController();
     // Detects when user signed in
-    googleSignIn.onCurrentUserChanged.listen((account) {
-      handleSignIn(account);
-    }, onError: (err) {
-      print('Error signing in: $err');
-    });
+    // googleSignIn.onCurrentUserChanged.listen((account) {
+    //   handleSignIn(account);
+    // }, onError: (err) {
+    //   print('Error signing in: $err');
+    // });
     // Reauthenticate user when app is opened
 
     //perlu pendalaman lanjut untuk bisa provide di desktop app
     //v13nr android 5 gak jalan
-    googleSignIn.signInSilently(suppressErrors: false).then((account) {
-      handleSignIn(account);
-    }).catchError((err) {
-      print('Error signing in: $err');
-    });
+    //googleSignIn.signInSilently(suppressErrors: false).then((account) {
+   //   handleSignIn(account);
+  //  }).catchError((err) {
+    //  print('Error signing in: $err');
+    //});
   }
 
   doLogin(String username, String passs) async {

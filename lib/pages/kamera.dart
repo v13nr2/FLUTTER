@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sosmed/utils.dart' as utils;
 import 'package:http_parser/http_parser.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 main() {
   runApp(MyApp());
@@ -30,17 +32,17 @@ class _FormDemoState extends State<FormDemo> {
   final _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _formData = {'email': null, 'password': null};
   final focusPassword = FocusNode();
-
+  String vPesan;
   File _image;
   final imagePicker = ImagePicker();
   Dio dio = Dio();
 
   Future<File> getImageCam() async {
-    var image = await imagePicker.getImage(source: ImageSource.camera, maxHeight: 380);
+    var image =
+        await imagePicker.getImage(source: ImageSource.camera, maxHeight: 180);
 
     return File(image.path);
   }
-
 
   Future uploadForm() async {
     final String url = utils.upload_url;
@@ -55,12 +57,12 @@ class _FormDemoState extends State<FormDemo> {
           contentType: MediaType(
             'picture',
             'jpg',
-           ),
-         ),
-        'name': fileName.substring(0,3)+'.jpg',
+          ),
+        ),
+        'name': fileName.substring(0, 3) + '.jpg',
         //'photo': fileName+'.jpg',
       });
-      
+
       var response = await dio.post(url,
           data: formData,
           options: Options(headers: {'x-api-key': utils.x_api_key}));
@@ -68,10 +70,23 @@ class _FormDemoState extends State<FormDemo> {
       print(response.data);
       print(response.statusCode);
       //print(response.request);
-      if(response.statusCode==200){
-        //showAlert(context, "Uploaded", "Status Upload ?");
+      if (response.statusCode == 200) {
+        // var mData = json.decode(response.data.toString());
+
+        // //if (mData != null) {
+        //   vPesan = mData["message"];
+        //   print("pesan = ");
+        //   print(vPesan);
+        // //}
+        Fluttertoast.showToast(
+            msg: "Foto Berhasil di Upload",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
-      
     } catch (e) {
       print(e);
     }
@@ -86,12 +101,11 @@ class _FormDemoState extends State<FormDemo> {
         actions: [
           GestureDetector(
             onTap: () {
-  
               getImageCam().then((value) {
                 setState(() {
                   _image = value;
                 });
-               //uploadForm().then((value) => print('uploaded'));
+                //uploadForm().then((value) => print('uploaded'));
               });
             },
             child: Padding(
@@ -103,9 +117,7 @@ class _FormDemoState extends State<FormDemo> {
           ),
           GestureDetector(
             onTap: () {
-              
-               uploadForm().then((value) => print('uploaded'));
-            
+              uploadForm().then((value) => print('uploaded'));
             },
             child: Padding(
                 padding: EdgeInsets.only(right: 10),
@@ -135,40 +147,46 @@ class _FormDemoState extends State<FormDemo> {
   }
 
   Widget _buildEmailField() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Email'),
-      validator: (String value) {
-        if (!RegExp(
-                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            .hasMatch(value)) {
-          return 'This is not a valid email';
-        }
-      },
-      onSaved: (String value) {
-        _formData['email'] = value;
-      },
-      textInputAction: TextInputAction.next,
-      onFieldSubmitted: (v) {
-        FocusScope.of(context).requestFocus(focusPassword);
-      },
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: TextFormField(
+        decoration: InputDecoration(labelText: 'Email'),
+        validator: (String value) {
+          if (!RegExp(
+                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+              .hasMatch(value)) {
+            return 'This is not a valid email';
+          }
+        },
+        onSaved: (String value) {
+          _formData['email'] = value;
+        },
+        textInputAction: TextInputAction.next,
+        onFieldSubmitted: (v) {
+          FocusScope.of(context).requestFocus(focusPassword);
+        },
+      ),
     );
   }
 
   Widget _buildPasswordField() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Password'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Preencha a senha';
-        }
-      },
-      onSaved: (String value) {
-        _formData['password'] = value;
-      },
-      focusNode: focusPassword,
-      onFieldSubmitted: (v) {
-        _submitForm();
-      },
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: TextFormField(
+        decoration: InputDecoration(labelText: 'Nama'),
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Preencha a senha';
+          }
+        },
+        onSaved: (String value) {
+          _formData['password'] = value;
+        },
+        focusNode: focusPassword,
+        onFieldSubmitted: (v) {
+          _submitForm();
+        },
+      ),
     );
   }
 

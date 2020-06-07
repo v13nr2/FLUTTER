@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:sosmed/pages/camera.dart';
-import 'package:sosmed/pages/input_from_cam.dart';
+
 
 import 'kamera.dart';
 
