@@ -10,7 +10,6 @@ import 'package:http/http.dart' as http;
 import 'package:sosmed/utils.dart' as utils;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
 class Home extends StatefulWidget {
@@ -41,8 +40,8 @@ class _HomeState extends State<Home> {
     //perlu pendalaman lanjut untuk bisa provide di desktop app
     //v13nr android 5 gak jalan
     //googleSignIn.signInSilently(suppressErrors: false).then((account) {
-   //   handleSignIn(account);
-  //  }).catchError((err) {
+    //   handleSignIn(account);
+    //  }).catchError((err) {
     //  print('Error signing in: $err');
     //});
   }
@@ -119,18 +118,16 @@ class _HomeState extends State<Home> {
     });
   }
 
+  _simpanSP(namasp, valuesp) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(namasp, valuesp);
+  }
 
-_simpanSP(namasp, valuesp) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString(namasp, valuesp);
-}
-
-_panggilSP(namasp) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  var _ambiltext = prefs.getString(namasp);
-  print(_ambiltext);
-}
-
+  _panggilSP(namasp) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var _ambiltext = prefs.getString(namasp);
+    print(_ambiltext);
+  }
 
   onTap(int pageIndex) {
     pageController.animateToPage(
@@ -188,10 +185,10 @@ _panggilSP(namasp) async {
               title: Text("Absen"),
             ),
             BottomNavigationBarItem(icon: Icon(Icons.search)),
-            BottomNavigationBarItem(icon: 
-              Icon(Icons.account_circle),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
               title: Text("Profile"),
-              ),
+            ),
           ]),
     );
     // return RaisedButton(
@@ -199,10 +196,6 @@ _panggilSP(namasp) async {
     //   onPressed: logout,
     // );
   }
-
-
-
-
 
   final forgotLabel = FlatButton(
     child: Text(
@@ -219,10 +212,7 @@ _panggilSP(namasp) async {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [
-              Theme.of(context).accentColor,
-              Theme.of(context).primaryColor,
-            ],
+            colors: [Colors.deepOrange, Colors.orangeAccent],
           ),
         ),
         alignment: Alignment.center,
@@ -231,7 +221,7 @@ _panggilSP(namasp) async {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'WiPaL',
+              'NalarOnLine',
               style: TextStyle(
                 fontFamily: "Signatra",
                 fontSize: 90.0,
